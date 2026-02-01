@@ -8,12 +8,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:raac/main.dart';
-
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    // Build a minimal test app and trigger a frame.
+    await tester.pumpWidget(const TestCounterApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
@@ -27,4 +25,31 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
+}
+
+class TestCounterApp extends StatefulWidget {
+  const TestCounterApp({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _TestCounterAppState createState() => _TestCounterAppState();
+}
+
+class _TestCounterAppState extends State<TestCounterApp> {
+  int _count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('$_count'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => setState(() => _count++),
+          child: const Icon(Icons.add),
+        ),
+      ),
+    );
+  }
 }

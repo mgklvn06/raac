@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:raac/features/passenger/presentation/passenger_waiting_screen.dart';
+import 'package:raac/features/rides/models/ride_model.dart';
+import 'package:raac/services/mock/mock_ride_service.dart';
+import 'package:raac/shared/enums/ride_status.dart';
+
 class RequestRideScreen extends StatelessWidget {
   final MockRideService rideService;
 
@@ -22,7 +28,7 @@ class RequestRideScreen extends StatelessWidget {
                   fromSection: 'Section A',
                   toSection: 'Section D',
                   price: 250,
-                  status: RideStatus.requested,
+                  status: RideStatus.requested, from: '', to: '',
                 ),
               );
               Navigator.push(

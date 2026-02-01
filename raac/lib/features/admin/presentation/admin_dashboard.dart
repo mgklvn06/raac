@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/mock_admin_service.dart';
-import '../../driver/models/driver_model.dart';
+import 'package:raac/services/mock/mock_admin_service.dart';
 
 class AdminDashboard extends StatefulWidget {
   final MockAdminService adminService;

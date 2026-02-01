@@ -1,36 +1,33 @@
-class IncomingRequestScreen extends StatelessWidget {
-  final MockRideService rideService;
+import 'package:flutter/material.dart';
+import '../../rides/ride_state.dart';
+import '../../../shared/enums/ride_status.dart';
 
-  const IncomingRequestScreen({super.key, required this.rideService});
+class IncomingRequestScreen extends StatelessWidget {
+  final RideState rideState;
+
+  const IncomingRequestScreen({super.key, required this.rideState});
 
   @override
   Widget build(BuildContext context) {
-    final ride = rideService.activeRide;
+    final ride = rideState.activeRide;
 
-    if (ride == null ||
-    ride.status != RideStatus.requested ||
-    !driverService.currentDriver!.online) {
-  return const Scaffold(
-    body: Center(child: Text('No ride requests')),
-  );
-}
-
+    if (ride == null || ride.status != RideStatus.requested) {
+      return const Center(child: Text('No incoming rides'));
+    }
 
     return Scaffold(
       appBar: AppBar(title: const Text('Incoming Ride')),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('From: ${ride.fromSection}'),
-          Text('To: ${ride.toSection}'),
+          Text('${ride.from} → ${ride.to}'),
           Text('Price: KSh ${ride.price}'),
+          const SizedBox(height: 20),
           ElevatedButton(
+            child: const Text('Accept'),
             onPressed: () {
-              rideService.acceptRide(
-                driverName: 'Driver Ali',
-                driverPhone: '+254711111111',
-              );
+              rideState.acceptRide('driver-001');
             },
-            child: const Text('Accept Ride'),
           ),
         ],
       ),

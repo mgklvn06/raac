@@ -1,3 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:raac/core/routing/app_router.dart';
+import 'package:raac/services/mock/mock_admin_service.dart';
+import 'package:raac/services/mock/mock_driver_service.dart';
+import 'package:raac/services/mock/mock_ride_service.dart';
+
 class RAACApp extends StatelessWidget {
   final AppRouter router;
   final MockRideService rideService;
@@ -15,11 +21,11 @@ class RAACApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FutureBuilder<Widget>(
+      home: FutureBuilder<Object>(
         future: router.resolveHome("mockUid"),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const CircularProgressIndicator();
-          final home = snapshot.data!;
+          final home = snapshot.data as Widget;
 
           // Pass mock services to home screens as needed
           return home;

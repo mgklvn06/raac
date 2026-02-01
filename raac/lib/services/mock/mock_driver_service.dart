@@ -1,4 +1,4 @@
-import '../models/driver_model.dart';
+import 'package:raac/features/driver/models/driver_model.dart';
 
 class MockDriverService {
   Driver? _currentDriver;

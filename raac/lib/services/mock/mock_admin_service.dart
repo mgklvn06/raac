@@ -1,5 +1,4 @@
-import '../../driver/data/mock_driver_service.dart';
-import '../../driver/models/driver_model.dart';
+import 'package:raac/features/driver/models/driver_model.dart';
 
 class MockAdminService {
   final List<Driver> _drivers = [

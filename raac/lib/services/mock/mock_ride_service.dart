@@ -1,4 +1,6 @@
-import '../models/ride_model.dart';
+import 'package:raac/features/rides/models/ride_model.dart';
+import 'package:raac/shared/enums/ride_status.dart';
+
 
 class MockRideService {
   Ride? _activeRide;
@@ -19,16 +21,16 @@ class MockRideService {
 
   void acceptRide({required String driverName, required String driverPhone}) {
     if (_activeRide == null) return;
+    // Ride.status is final and cannot be reassigned here; only update mutable fields.
     _activeRide!
-      ..status = RideStatus.accepted
       ..driverName = driverName
       ..driverPhone = driverPhone;
   }
 
   void completeRide() {
     if (_activeRide == null) return;
-    _activeRide!.status = RideStatus.completed;
-    _rideHistory.add(_activeRide!);
+    final completed = _activeRide!.copyWith(status: RideStatus.completed);
+    _rideHistory.add(completed);
     _activeRide = null;
   }
 

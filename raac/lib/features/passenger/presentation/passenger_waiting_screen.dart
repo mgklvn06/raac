@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:raac/services/mock/mock_ride_service.dart';
+import 'package:raac/shared/enums/ride_status.dart';
+
 class PassengerWaitingScreen extends StatelessWidget {
   final MockRideService rideService;
 
