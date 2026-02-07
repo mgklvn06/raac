@@ -15,18 +15,46 @@ class RideState extends ChangeNotifier {
   // existing methods omitted for clarity
 
   void completeRide() {
-  if (activeRide == null) return;
+    if (activeRide == null) return;
 
-  final completed = activeRide!.copyWith(status: RideStatus.completed);
-  history.add(completed);
+    final completed = activeRide!.copyWith(status: RideStatus.completed);
+    history.add(completed);
 
-  driverState.onRideCompleted(completed);
+    driverState.onRideCompleted(completed);
 
-  activeRide = null;
-  notifyListeners();
-}
+    activeRide = null;
+    notifyListeners();
+  }
 
-  void acceptRide(String s) {}
+  void acceptRide(String driverId) {
+    if (activeRide == null) {
+      requestRide(from: 'Hagadera Section B', to: 'Market Area', price: 150);
+    }
+    activeRide = activeRide!.copyWith(
+      status: RideStatus.accepted,
+      driverId: driverId,
+      driverName: 'Driver Ali',
+      driverPhone: '+254711111111',
+    );
+    notifyListeners();
+  }
 
-  void requestRide({required String from, required String to, required int price}) {}
+  void requestRide({
+    required String from,
+    required String to,
+    required int price,
+  }) {
+    activeRide = Ride(
+      id: 'ride_demo',
+      from: from,
+      to: to,
+      price: price,
+      status: RideStatus.requested,
+      passengerName: 'Passenger One',
+      passengerPhone: '+254700000000',
+      fromSection: from,
+      toSection: to,
+    );
+    notifyListeners();
+  }
 }

@@ -7,6 +7,12 @@ class Ride {
   final int price;
   final RideStatus status;
   final String? driverId;
+  final String passengerName;
+  final String passengerPhone;
+  final String fromSection;
+  final String toSection;
+  String? driverName;
+  String? driverPhone;
 
   Ride({
     required this.id,
@@ -14,20 +20,20 @@ class Ride {
     required this.to,
     required this.price,
     required this.status,
-    this.driverId, required String passengerName, required String passengerPhone, required String fromSection, required String toSection,
+    this.driverId,
+    required this.passengerName,
+    required this.passengerPhone,
+    required this.fromSection,
+    required this.toSection,
+    this.driverName,
+    this.driverPhone,
   });
-
-  Null get driverName => null;
-
-  Null get driverPhone => null;
-
-  set driverPhone(String driverPhone) {}
-
-  set driverName(String driverName) {}
 
   Ride copyWith({
     RideStatus? status,
     String? driverId,
+    String? driverName,
+    String? driverPhone,
   }) {
     return Ride(
       id: id,
@@ -35,7 +41,13 @@ class Ride {
       to: to,
       price: price,
       status: status ?? this.status,
-      driverId: driverId ?? this.driverId, passengerName: '', passengerPhone: '', fromSection: '', toSection: '',
+      driverId: driverId ?? this.driverId,
+      passengerName: passengerName,
+      passengerPhone: passengerPhone,
+      fromSection: fromSection,
+      toSection: toSection,
+      driverName: driverName ?? this.driverName,
+      driverPhone: driverPhone ?? this.driverPhone,
     );
   }
 }

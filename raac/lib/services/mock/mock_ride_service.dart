@@ -21,10 +21,11 @@ class MockRideService {
 
   void acceptRide({required String driverName, required String driverPhone}) {
     if (_activeRide == null) return;
-    // Ride.status is final and cannot be reassigned here; only update mutable fields.
-    _activeRide!
-      ..driverName = driverName
-      ..driverPhone = driverPhone;
+    _activeRide = _activeRide!.copyWith(
+      status: RideStatus.accepted,
+      driverName: driverName,
+      driverPhone: driverPhone,
+    );
   }
 
   void completeRide() {

@@ -13,7 +13,14 @@ class DriverState extends ChangeNotifier {
   /// weekId → WeeklyFee
   final Map<String, WeeklyFee> weeklyFees = {};
 
-  Null get currentWeekFee => null;
+  int get currentWeekFee {
+    final weekId = DateUtilsHelper.currentWeekId();
+    weeklyFees.putIfAbsent(
+      weekId,
+      () => WeeklyFee(weekId: weekId, amount: 0),
+    );
+    return weeklyFees[weekId]!.amount;
+  }
 
   // -------------------
   // Ride Completion Hook
@@ -77,5 +84,5 @@ class DriverState extends ChangeNotifier {
     }
   }
 
-  void getCurrentWeekFee() {}
+  int getCurrentWeekFee() => currentWeekFee;
 }
